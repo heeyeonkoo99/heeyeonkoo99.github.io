@@ -92,7 +92,11 @@ analytics:
     anonymize_ip         : # true, false (default)
 
 
-# Site Author
+# Site 
+
+
+
+
 author:
   name             : "KooKoo"
   avatar           : "/assets/images/pooh.jpg"
