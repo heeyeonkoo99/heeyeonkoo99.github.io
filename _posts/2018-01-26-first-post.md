@@ -1,19 +1,28 @@
 ---
-title: "Welcome to Jekyll!"
+title: "Android 전반적인 큰 틀"
 date: 2017-10-20 08:26:28 -0400
 categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+# 안드로이드란?
+- 안드로이드는 구글에서 만든 스마트폰용 Operating System이다.운영체제와 미들웨어, 사용자 인터페이스, 어플리케이션, MMS 서비스 등을 하나로 묶어 서비스를 제공하며 다양한 어플리케이션을 만들어 설치하면 실행될 수 있도록 구성된 어플리케이션 플랫폼이라고도 볼 수 있다. 많은 사람들이 iOS(애플 운영체제)에 견주어 스마트폰과 태블릿으로 안드로이드 운영체제를 사용하면서, 안드로이드는 세계 모바일 시장에서 가장 성공한 OS라는 평가를 받고있다. 안드로이드는 리눅스(Linux)를 기반으로 제작되었고 언어는 자바를 사용합니다. 최근에는 kotlin이 인기다.
+- 안드로이드 버전의 명칭은 알파벳 순서대로 진행되는 디저트의 명칭이다. 예를들어 ApplePie-BananaBread-Cubcake...와 같은 형식이다.
+![image](https://user-images.githubusercontent.com/68431716/118111574-db86df80-b41e-11eb-93df-869819311dd9.png)
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+# 안드로이드 4대 컴포넌트란?
+- 각각의 요소는 intent를 통해 상호통신을 한다.
+- Activity(액티비티): 액티비티는 UI 화면을 담당하는 컴포넌트다. 액티비티 역할을 하기 위해서는 자바소스에서 Activity클래스를 상속해야 하며 액티비티가 기본적으로 가지고 있는 생명주기 메소드를 재정의하여 원하는 기능을 구현하는 방식으로 제작한다. 가장 많이 쓰이는 컴포넌트 이기때문에 굉장히 중요하다고 볼 수 있고 fragment와 같이 쓰이는 경우가 많던데 이때 fragment와 비교해서 알아둘 필요가 있다.
+- Service(서비스): 백그라운드에서 실행되는 프로세스를 의미하고 화면이 존재하지 않는다. 새로 만든 후에는 항상 manifest에 등록을 해줘야한다. 메인액티비티에서 서비스를 시작하고 싶은 경우에는 startService()라는 메서드를 이용해 서비스를 실행시킬수 있다. 한번 시작된 서비스는 어플리케이션이 종료되도 계속해서 백그라운드에서 돌아가고 모든 서비스는 Service 클래스를 상속받아서 사용한다. 또한 네트워크를 통해서 데이터를 가져올수 있다.
+- Content Provider(콘텐트제공자): 콘텐트 제공자는 데이터를 관리하고 다른 어플리케이션 데이터를 제공해주는 컴포넌트로, 데이터베이스의 데이터를 전달할때 많이 사용한다. 콘텐트 제공자는 생명주기를 가지고 있지 않다.
+- Broadcast Receiver(방송수신자): 방송 수신자란 안드로이드에서 다양한 이벤트와 정보를 받아 반응하는 컴포넌트로, 브로드캐스팅은 메시지를 여러 객체에게 전달하는 방법을 의미하는데 이렇게 전달되는 브로드캐스팅 메시지를 방송수신자라는 어플리케이션의 구성요소를 이용해 받을 수 있다.
 
-Jekyll also offers powerful support for code snippets:
+# 안드로이드 애플리케이션 구조
+- MVC 모델로 구성되어 있다.
+- MODEL: 애플리케이션의 데이터를 저장하는 역할을 담당하며, 안드로이드에 내장된 데이터베이스인 에스큐엘라이트(SQLite), 파일(File) 그리고 애플리케이션 간의 데이터 공유를 위해 사용할 수 있는 콘텐트 프로바이더(Content Provider)가 이 영역에 속한다.
+- CONTROL: VIEW와 MODEL을 서로 연결하고 제어하는 영역이며, 이 영역에는 액티비티(Activity), 서비스(Service), 브로드캐스트 리시버(BroadcastReceiver)가 포함되며 안드로이드 3.0 이후부터는 프래그먼트도 포함된다.
+- VIEW: 화면 구성을 담당하는 영역이며, 이 영역은 View 클래스를 상속하는 클래스를 사용해서 구성할 수 있다.
+![image](https://user-images.githubusercontent.com/68431716/118114662-dc217500-b422-11eb-9b23-c2f410be2d7e.png)
+- 왜 MVC패턴을 사용하는가? 사용자가 보는 페이지, 데이터처리, 그리고 이 2가지를 중간에서 제어하는 컨트롤, 이 3가지로 구성되는 하나의 애플리케이션을 만들면 각각 맡은 바에만 집중을 할수 있게 된다. 그렇지만 Controller에 다수의 Model과 View가 복잡하게 연결되어 있는, MVC 규모 자체가 너무 복잡하고 비대해져서 새 기능을 추가할때마다 의존성을 일일이 추가해야될경우 Massive VIew Controller이라고 부르기도 한다.
 
-​```python
-def print_hi(name):
-  print("hello", name)
-print_hi('Tom')
-​```
 
 Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
