@@ -1,6 +1,6 @@
 ---
 title: "Android 전반적인 큰 틀"
-date: 2017-10-20 08:26:28 -0400
+date: 2021-05-13 08:26:28 -0400
 categories: jekyll update
 ---
 # 안드로이드란?
