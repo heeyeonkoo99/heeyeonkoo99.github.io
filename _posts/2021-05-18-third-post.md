@@ -1,5 +1,5 @@
 ---
-title: "Android 기본개념_면접준비"
+title: "Android 기본개념_면접준비1"
 date: 2021-05-18 08:26:28 -0400
 categories: jekyll update
 ---
