@@ -1,7 +1,8 @@
 ---
 title: "Android 전반적인 큰 틀"
 date: 2021-05-13 08:26:28 -0400
-categories: jekyll update
+categories: front-end android
+url: https://heeyeonkoo99.github.io/front-end/
 ---
 # 안드로이드란?
 - 안드로이드는 구글에서 만든 스마트폰용 Operating System이다.운영체제와 미들웨어, 사용자 인터페이스, 어플리케이션, MMS 서비스 등을 하나로 묶어 서비스를 제공하며 다양한 어플리케이션을 만들어 설치하면 실행될 수 있도록 구성된 어플리케이션 플랫폼이라고도 볼 수 있다. 많은 사람들이 iOS(애플 운영체제)에 견주어 스마트폰과 태블릿으로 안드로이드 운영체제를 사용하면서, 안드로이드는 세계 모바일 시장에서 가장 성공한 OS라는 평가를 받고있다. 안드로이드는 리눅스(Linux)를 기반으로 제작되었고 언어는 자바를 사용합니다. 최근에는 kotlin이 인기다.
