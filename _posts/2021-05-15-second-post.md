@@ -1,7 +1,8 @@
 ---
 title: "Android 생명주기 정리"
 date: 2021-05-15 08:26:28 -0400
-categories: jekyll update
+categories: front-end android
+url: https://heeyeonkoo99.github.io/front-end/
 ---
 # 안드로이드 생명주기는 왜 있는걸까?
 - 사용자가 앱을 탐색하고, 앱에서 나가고, 앱으로 다시 돌아가면, 앱의 Activity 인스턴스는 수명 주기 안에서 서로 다른 상태를 통해 전환된다. Activity 클래스는 활동이 상태 변화(시스템이 활동을 생성, 중단 또는 다시 시작하거나, 활동이 있는 프로세스를 종료하는 등)를 알아차릴 수 있는 여러 콜백을 제공한다.
