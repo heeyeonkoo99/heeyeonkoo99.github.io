@@ -15,12 +15,12 @@ categories: front-end android
 
 > 다시말해, 인플레이션이란 xml layout file에 비치된 resources들이 setContentView()나 LayoutInflator 객체등을 통해 메모리상에 실제로 객체화되어 어플리케이션에 보여지는 과정을 말합니다.  setContentView()호출 전에 R.id.button과 같이 xml 파일의 리소스를 참조하려하면 당연히 null exception이 뜬다. 왜냐면 아직 메모리에 xml 리소스가 객체화가 되어있지 않기때문에 참조할수 없기때문이다. LayoutInflater 객체는 setContentView가 xml파일의 모든 뷰들을 객체화시켜준다면, 일부 뷰만을 객체화시켜주는 것이다. LayoutInflater 클래스는 시스템 서비스로 제공되므로 사용하려면 시스템 서비스를 사용해야한다.
 
- ```
+ ```java
 LayoutInflater inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 inflater.inflate(R.layout.sub1,container,true);
 ```
 
-```
+```java
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
