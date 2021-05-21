@@ -114,6 +114,7 @@ var combined = {
 var { other, ...others } = combined;
 // others = { one: 1, two: 2, three: 3, four: 4}
 ```
+
 # 02-3. 가변 변수와 불변 변수
 - 기존 자바스크립트 문법은 변수 선언에 var 키워드를 사용했지만 ES6에서는 값을 수정할수 있는 가변 변수를 위한 let키워드와, 값을 수정할 수 없는 불변 변수를 위한 const 키워드를 사용한다. 
 
@@ -520,7 +521,7 @@ function parse(qs) {
 
 
 
-* 참고한 : https://github.com/justinpark/justin-do-it-react/blob/master/src/02
+* 참고한 github : https://github.com/justinpark/justin-do-it-react/blob/master/src/02
 
 
 
