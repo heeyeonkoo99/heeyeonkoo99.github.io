@@ -345,7 +345,9 @@ var obj2 = {
   methodB() { return 0; },
 };
 ```
+
 > 구조 분해 사용 방법 알아보기
+
 ```javascript
 // ES5 예제
 var list = [0,1];
