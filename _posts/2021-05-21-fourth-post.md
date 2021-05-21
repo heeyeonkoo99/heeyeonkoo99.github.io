@@ -41,6 +41,7 @@ var operator2 = `불리언값은 ${boolValue ? '참' : '거짓'}입니다.`;
 # 02-2. 전개 연산자
 - ES6의 전개 연산자(spread operator)는 독특하면서도 매우 유용한 문법으로 나열형 자료를 추출하거나 연결할때 사용한다. 사용방법은 배열이나 객체, 변수명 앞에 마침표 세 개(...)를 입력한다. 다만, 배열,객체,함수 인자 표현식([],{},()) 안에서만 사용해야 한다.
 > ES6의 배열 전개 연산자 사용 방법 
+
 ```javascript
 // ES5 문법
 var array1 = ['one', 'two'];
@@ -78,7 +79,9 @@ function func(first, ...others) {
 // 올바르지 못한 예
 // var wrongArr = ...array1;
 ```
+
 > ES6의 객체 전개 연산자 사용 방법 
+
 ```javascript
 // ES5 예제
 var objectOne = { one: 1, two: 2, other: 0 };
@@ -113,6 +116,7 @@ var { other, ...others } = combined;
 ```
 # 02-3. 가변 변수와 불변 변수
 - 기존 자바스크립트 문법은 변수 선언에 var 키워드를 사용했지만 ES6에서는 값을 수정할수 있는 가변 변수를 위한 let키워드와, 값을 수정할 수 없는 불변 변수를 위한 const 키워드를 사용한다. 
+
 ```javascript
 const num = 1;
 num = 3; // 타입 에러가 발생합니다
@@ -171,6 +175,7 @@ arr.forEach((item, index) => {
 
 # 02-4. 클래스
 - 기존 자바스크립트 문법은 클래스 표현식이 없어서 prototype으로 클래스를 표현했다. 하지만 ES6는 클래스를 정의하여 사용할수 있다. 
+
 ```javascript
 // ES5 문법
 function Shape(x, y) {
@@ -258,6 +263,7 @@ c.area(); // 100
 
 # 02-5. 화살표 함수
 - 화살표 함수는 화살표 기호=>로 함수를 선언하고 화살표 기둥 =을 사용하므로 fat arrow function이라고 부르기도 한다. 
+
 ```javascript
 function add(first, second) {
   return first + second;
@@ -303,7 +309,9 @@ class MyClass {
 ```
 
 # 02-6. 객체 확장 표현식과 구조 분해 할당
+
 > 객체확장 표현식 사용 방법 알아보기
+
 ```javascript
 // ES5의 예
 var x = 0;
@@ -385,6 +393,7 @@ var { key1, ...others } = { key1: 'one', key2: 'two' };
 
 # 02-7. 라이브러리 의존성 관리
 - ES6는 import 구문을 사용하여 script엘리먼트 없이 연결된 파일 및 의존 파일을 먼저 모두 내려 받고 코드를 구동하도록 변경한다.
+
 ```javascript
 // CommonJS 방식
 var module = require('./MyModule');
@@ -412,8 +421,10 @@ module.exports = new Func();
 export const CONST_VALUE = 0;
 export default new Func();
 ```
+
 # 02-8. 배열 함수
 - ES6에선 배열 함수인 forEach(),map(),reduce()함수가 추가되었다.
+
 ```javascript
 const qs = 'banana=10&apple=20&orange=30';
 
@@ -502,6 +513,7 @@ function parse(qs) {
 - 기존의 콜백지옥을 벗어나기 위해서 만들었다는 후문이다.**~~비동기 처리방식이 중요하니 다시한번 복습하록 하자.~~**
 
 # 02-10. 디바운스와 스로틀
+
 > 디바운스(debounce): 어떤 내용을 입력하다가 특정 시간동안 대기하고 있으면 마지막에 입력된 내용을 입력하다가 특정시간 동안 대기하고 있으면 마지막에 입력된 내용을 바탕으로 서버 요청을 하는 방법이다. ex)연관검색어
 
 > 스로틀(throttle): 디바운스 개념과 비슷하지만 '입력되는 동안에도 바로 이전에 요청한 작업을 주기적으로 실행한다는 점'이 다르다. ex)페이스북의 타임라인의 무한 스크롤 기능
