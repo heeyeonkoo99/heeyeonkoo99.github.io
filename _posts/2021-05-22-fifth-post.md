@@ -85,6 +85,7 @@ export default App;
 - Extensible Markup Language의 약자로 W3C 권고 확장성 있는 마크업 언어
 - W3C가 인간과 응용프로그램간, 혹은 응용프로그램 간에 정보를 쉽게 교환하기 위해 만든 데이터 교환 포맷
 - eXtensible: 데이터를 설명하는 태그(Tag)를 사용자 마음대로 정의할수 있다.
+
 > XML과 HTML의 차이
 - XML은 data를 전달하는 데에 포커스를 맞춘 언어
 - HTML은 data를 표현하는 데에 포커스를 맞춘 언어
