@@ -112,8 +112,14 @@ export default App;
 그러면, Virtual DOM 이 해결 하려고 하는건 무엇이냐? 그 DOM fragment를 관리하는 과정을 수동으로 하나하나 작업 할 필요 없이, 자동화하고 추상화하는거에요. 그 뿐만 아니라, 만약에 이 작업을 여러분들이 직접 한다면, 기존 값 중 어떤게 바뀌었고 어떤게 바뀌지 않았는지 계속 파악하고 있어야하는데 (그렇지 않으면 수정 할 필요가 없는 DOM 트리도 업데이트를 하게 될 수도 있으니까요), 이것도 Virtual DOM 이 이걸 자동으로 해주는거에요. 어떤게 바뀌었는지 , 어떤게 바뀌지 않았는지 알아내주죠. 마지막으로, DOM 관리를 Virtual DOM 이 하도록 함으로써, 컴포넌트가 DOM 조작 요청을 할 때 다른 컴포넌트들과 상호작용을 하지 않아도 되고, 특정 DOM 을 조작할 것 이라던지, 이미 조작했다던지에 대한 정보를 공유 할 필요가 없습니다. 즉, 각 변화들의 동기화 작업을 거치지 않으면서도 모든 작업을 하나로 묶어줄 수 있다는거죠.
 
 
-* 참고한 사이트: <https://ko.reactjs.org/docs/introducing-jsx.html> <https://facebook.github.io/jsx/> <https://react.vlpt.us/basic/04-jsx.html> <https://velopert.com/3236>
-* 참고한 블로그: <https://helloworld-88.tistory.com/67> <https://ryublock.tistory.com/41>
+* 참고한 사이트:         
+<https://ko.reactjs.org/docs/introducing-jsx.html>      
+<https://facebook.github.io/jsx/>        
+<https://react.vlpt.us/basic/04-jsx.html>       
+<https://velopert.com/3236>         
+* 참고한 블로그:       
+<https://helloworld-88.tistory.com/67>      
+<https://ryublock.tistory.com/41>     
 **~~역시 공식사이트를 가야지 명확한 답을 얻을 수 있다.~~**
 
 
