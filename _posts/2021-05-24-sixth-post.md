@@ -178,7 +178,8 @@ export function sayHi(user) {
 }
 ```
 
-> 아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.      
+> 아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.
+     
 ```javascript
 // 📁 main.js
 import {default as User, sayHi} from './user.js';
