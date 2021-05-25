@@ -154,6 +154,7 @@ export class { // 에러! (default export가 아닌 경우엔 이름이 꼭 필�
 ```
 > **'default' name에 대해서**     
 > default 키워드는 기본 내보내기를 참조하는 용도로 종종 사용된다. 함수를 내보낼 때 아래와 같이 함수 선언부와 떨어진 곳에서 default 키워드를 사용하면, 해당 함수를 기본 내보내기 할 수 있다.
+
 ```javascript
 function sayHi(user) {
   alert(`Hello, ${user}!`);
@@ -207,8 +208,10 @@ import LoginForm from './loginForm.js';
 import func from '/path/to/func.js';
 ...
 ```
+
 # 모듈 다시 내보내기
 export ... from ... 문법을 사용하면 가져온 개체를 즉시 ‘다시 내보내기(re-export)’ 할 수 있다. 이름을 바꿔서 다시 내보낼 수 있는 것이다.
+
 ```javascript
 export {sayHi} from './say.js'; // sayHi를 다시 내보내기 함
 
