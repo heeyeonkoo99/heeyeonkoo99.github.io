@@ -163,7 +163,7 @@ function sayHi(user) {
 // 함수 선언부 앞에 'export default'를 붙여준 것과 동일합니다.
 export {sayHi as default};
 ```
->흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.    
+> 흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.
 ```javascript
 // 📁 user.js
 export default class User {
@@ -176,7 +176,8 @@ export function sayHi(user) {
   alert(`Hello, ${user}!`);
 }
 ```
->아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.    
+
+> 아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.    
 ```javascript
 // 📁 main.js
 import {default as User, sayHi} from './user.js';
@@ -190,7 +191,7 @@ import * as user from './user.js';
 
 let User = user.default; // default export
 new User('John');
-```
+```    
 > **default export의 이름에 관한 규칙**    
 >  named export는 내보냈을 때 사용한 이름 그대로 가져오므로 관련 정보를 파악하기 쉽다.그런데 아래와 같이 내보내기 할 때 쓴 이름과 가져오기 할 때 쓸 이름이 동일해야 한다는 제약이 있다..그렇지만 named export와 다르게 default export는 가져오기 할 때 개발자가 원하는 대로 이름을 지정해 줄 수 있다. But 그런데 이렇게 자유롭게 이름을 짓다 보면 같은 걸 가져오는데도 이름이 달라 혼란의 여지가 생길 수 있기에 코드의 일관성을 유지하기 위해 default export 한 것을 가져올 땐 아래와 같이 파일 이름과 동일한 이름을 사용하도록 팀원끼리 내부 규칙을 정할 수 있다.
 ```javascript
