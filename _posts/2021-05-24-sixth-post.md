@@ -31,7 +31,7 @@ export function sayHi(user) {
   alert(`Hello, ${user}!`);
 }  // 끝에 ;(세미콜론)을 붙이지 않습니다.
 ```
-
+     
 # 선언부 떨어진 곳에 export 붙이기
 
 ```javascript
@@ -46,7 +46,7 @@ function sayBye(user) {
 
 export {sayHi, sayBye}; // 두 함수를 내보냄
 ```
-
+     
 # import *
 무언갈 가져오고 싶다면 아래와 같이 이에 대한 목록을 만들어 import {...}안에 적어주면 되며, 가져올 것이 많으면 import * as <obj> 처럼 객체 형태로 원하는 것들을 가지고 올 수 있다. 
   
@@ -81,7 +81,7 @@ import {sayHi} from './say.js';
 >   빌드 툴은 실제 사용되는 함수가 무엇인지 파악해, 그렇지 않은 함수는 최종 번들링 결과물에 포함하지 않는다. 이 과정에서 불필요한 코드가 제거되기 때문에 빌드 결과물의 크기가 작아지며 이런 최적화 과정은 ```'가지치기(tree-shaking)'``` 라고 불린다.    
 >   2. 어떤 걸 가지고 올지 명시하면 이름을 간결하게 써줄 수 있다. 예를 들어 say.sayHi()보다 sayHi()가 더 간결하다.     
 >   3. 어디서 어떤 게 쓰이는지 명확하기 때문에 코드 구조를 파악하기가 쉬워 리팩토링이나 유지보수에 도움이 된다.
-
+    
 # import ‘as’ 와 Export ‘as’    
 as를 사용하면 이름을 바꿔서 모듈을 가져올 수 있다. 먼저 import에서  sayHi를 hi로, sayBye를 bye로 이름을 바꿔서 가져와 보자.
 ```javascript
@@ -104,7 +104,7 @@ import * as say from './say.js';
 say.hi('John'); // Hello, John!
 say.bye('John'); // Bye, John!
 ```
-
+    
 # export default
 모듈은 크게 두 종류로 나뉜다.    
 1. 복수의 함수가 있는 라이브러리 형태의 모듈(위 예시의 say.js)    
@@ -163,7 +163,7 @@ function sayHi(user) {
 // 함수 선언부 앞에 'export default'를 붙여준 것과 동일합니다.
 export {sayHi as default};
 ```
-흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.
+>흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.
 ```javascript
 // 📁 user.js
 export default class User {
@@ -176,14 +176,14 @@ export function sayHi(user) {
   alert(`Hello, ${user}!`);
 }
 ```
-아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.
+>아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.
 ```javascript
 // 📁 main.js
 import {default as User, sayHi} from './user.js';
 
 new User('John');
 ```
-"*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.
+>"*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.
 ```javascript
 // 📁 main.js
 import * as user from './user.js';
@@ -208,7 +208,7 @@ import LoginForm from './loginForm.js';
 import func from '/path/to/func.js';
 ...
 ```
-
+    
 # 모듈 다시 내보내기
 export ... from ... 문법을 사용하면 가져온 개체를 즉시 ‘다시 내보내기(re-export)’ 할 수 있다. 이름을 바꿔서 다시 내보낼 수 있는 것이다.
 
@@ -241,7 +241,9 @@ import User from './user.js';
 export {User};
 ...
 ```
+    
 ---------------------------------------
+    
 ### 참고하여 알아둘것!    
 -export는 내보낼 변수 하나하나의 값을 선언하여 내보내며 exports는 exports객체를 내보내므로 객체의 프로퍼티 형태로 내보낸다.     
 -require와 import의 차이는 require는 내보낸 값이 module 객체에 담겨오며, import는 값 자체를 가져온다.
