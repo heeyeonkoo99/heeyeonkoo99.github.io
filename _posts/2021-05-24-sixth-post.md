@@ -156,7 +156,6 @@ export class { // 에러! (default export가 아닌 경우엔 이름이 꼭 필�
 ```
 > **'default' name에 대해서**     
 > default 키워드는 기본 내보내기를 참조하는 용도로 종종 사용된다. 함수를 내보낼 때 아래와 같이 함수 선언부와 떨어진 곳에서 default 키워드를 사용하면, 해당 함수를 기본 내보내기 할 수 있다.
-> 
 ```javascript
 function sayHi(user) {
   alert(`Hello, ${user}!`);
@@ -165,7 +164,7 @@ function sayHi(user) {
 // 함수 선언부 앞에 'export default'를 붙여준 것과 동일합니다.
 export {sayHi as default};
 ```
->   흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.    
+> 흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.
 ```javascript
 // 📁 user.js
 export default class User {
@@ -185,8 +184,7 @@ import {default as User, sayHi} from './user.js';
 
 new User('John');
 ```
-
-> "*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.    
+> "*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.
 ```javascript
 // 📁 main.js
 import * as user from './user.js';
