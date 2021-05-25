@@ -163,7 +163,7 @@ function sayHi(user) {
 // 함수 선언부 앞에 'export default'를 붙여준 것과 동일합니다.
 export {sayHi as default};
 ```
->흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.
+>흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.    
 ```javascript
 // 📁 user.js
 export default class User {
@@ -176,14 +176,14 @@ export function sayHi(user) {
   alert(`Hello, ${user}!`);
 }
 ```
->아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.
+>아래와 같은 방식을 사용하면 default export와 named export를 동시에 가져올 수 있다.    
 ```javascript
 // 📁 main.js
 import {default as User, sayHi} from './user.js';
 
 new User('John');
 ```
->"*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.
+>"*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.    
 ```javascript
 // 📁 main.js
 import * as user from './user.js';
