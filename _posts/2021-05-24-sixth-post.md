@@ -187,6 +187,7 @@ import {default as User, sayHi} from './user.js';
 new User('John');
 ```
 >"*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.    
+
 ```javascript
 // 📁 main.js
 import * as user from './user.js';
@@ -194,6 +195,7 @@ import * as user from './user.js';
 let User = user.default; // default export
 new User('John');
 ```    
+
 > **default export의 이름에 관한 규칙**    
 >  named export는 내보냈을 때 사용한 이름 그대로 가져오므로 관련 정보를 파악하기 쉽다.그런데 아래와 같이 내보내기 할 때 쓴 이름과 가져오기 할 때 쓸 이름이 동일해야 한다는 제약이 있다..그렇지만 named export와 다르게 default export는 가져오기 할 때 개발자가 원하는 대로 이름을 지정해 줄 수 있다. But 그런데 이렇게 자유롭게 이름을 짓다 보면 같은 걸 가져오는데도 이름이 달라 혼란의 여지가 생길 수 있기에 코드의 일관성을 유지하기 위해 default export 한 것을 가져올 땐 아래와 같이 파일 이름과 동일한 이름을 사용하도록 팀원끼리 내부 규칙을 정할 수 있다.
 ```javascript
