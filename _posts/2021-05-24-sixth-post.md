@@ -182,7 +182,7 @@ import {default as User, sayHi} from './user.js';
 
 new User('John');
 ```
-* 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.
+"*" 를 사용해 모든 것을 객체 형태로 가져오는 방법도 있는데, 이 경우엔 default 프로퍼티는 정확히 default export를 가리킨다.
 ```javascript
 // 📁 main.js
 import * as user from './user.js';
