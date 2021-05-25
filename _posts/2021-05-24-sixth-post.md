@@ -157,13 +157,18 @@ export class { // 에러! (default export가 아닌 경우엔 이름이 꼭 필�
 > **'default' name에 대해서**     
 > default 키워드는 기본 내보내기를 참조하는 용도로 종종 사용된다. 함수를 내보낼 때 아래와 같이 함수 선언부와 떨어진 곳에서 default 키워드를 사용하면, 해당 함수를 기본내보내기를 할수있다.
 ```javascript
-function sayHi(user) {
-  alert(`Hello, ${user}!`);
+// 📁 user.js
+export default class User {
+  constructor(name) {
+    this.name = name;
+  }
 }
 
-// 함수 선언부 앞에 'export default'를 붙여준 것과 동일합니다.
-export {sayHi as default};
+export function sayHi(user) {
+  alert(`Hello, ${user}!`);
+}
 ```
+
 > 흔치 않지만 user.js라는 모듈에 ‘default’ export 하나와 다수의 named export가 있다고 해보자.
 ```javascript
 // 📁 user.js
