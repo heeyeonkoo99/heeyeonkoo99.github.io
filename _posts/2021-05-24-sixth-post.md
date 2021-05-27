@@ -1,6 +1,6 @@
 ---
 title: "[리액트 프로그래밍 정석] 모듈 내보내고 가져오기"
-date: 2021-05-22 08:26:28 -0400
+date: 2021-05-24 08:26:28 -0400
 categories: front-end react
 url: https://heeyeonkoo99.github.io/front-end/
 ---
