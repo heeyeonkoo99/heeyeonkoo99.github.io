@@ -106,7 +106,28 @@ const formula = compose(
 ```
 
 # 하이어오더 컴포넌트
-디자인패턴은 코드 중 활용도가 높은 구현방식ㅇ르 모아둔 비밀레시피와 같다. 앞서 공부한 커링도 디자인 패턴의 일종이며 리액트 컴포넌트에도 디자인 패턴을 적용할수 있다.
+디자인패턴은 코드 중 활용도가 높은 구현방식ㅇ르 모아둔 비밀레시피와 같다. 앞서 공부한 커링도 디자인 패턴의 일종이며 리액트 컴포넌트에도 디자인 패턴을 적용할수 있다. 이번에 알아볼 디자인 패턴은 데코레이터 패턴이며 데코레이터 패턴을 적용하여 하이어오더 컴포넌트까지 개념을 확장해본다.    
+- 데코레이터 패턴: 상속구조에서의 '기존구조를 해치지 않으면서 원하는 기능만 상속받는 것을 해결못함'이라는 단점을 보완하기 위해 데코레이터 패턴이 제안되었다. 클래스 간의 종속성 없이 기능만을 공유한다.    
+-하이어오더 컴포넌트의 특징:
+  - 함수나 클래스 형태의 컴포넌트를 모두 반환할수 있다.
+  - 하이어오더 컴포넌트는 기존 컴포넌트를 확장한 컴포넌트이므로 기존 컴포넌트로 모든 프로퍼티를 전달해줘야 한다.
+  
+  ```javascript
+  
+function higherOrderComponent(Component){
+    return function Enhanced(props){
+        return <Component{...props}/>;
+    }
+}
+
+function higherOrderComponent(Component){
+    return class Enhanced extends React.Component{
+        render(){
+            return <Component{...this.props}/>;
+        }
+    }
+}
+  ```
 
 ### 참고하여 알아둘것!
 
@@ -115,7 +136,8 @@ const formula = compose(
 * 참고한 사이트:         
 
 
-* 참고한 블로그:         
+* 참고한 블로그: <https://jwprogramming.tistory.com/68>    
+        
      
     
 **~~역시 공식사이트를 가야지 명확한 답을 얻을 수 있다.~~**
