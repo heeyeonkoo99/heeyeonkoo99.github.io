@@ -131,36 +131,36 @@ function higherOrderComponent(Component){
 
 - recompose 라이브러리는 하이어오더 컴포넌트 중 자주 사용하는 패턴을 모은 '하이어오더 컴포넌트 라이브러리'이다. 
 
-  ```javascript
-  yarn add recompose
-  ```
+```javascript
+yarn add recompose
+```
 
  - branch()함수는 조건식에 따라 다른 하이어오더 컴포넌트를 출력해야하는 경우 사용하면 된다. 
   
-    ```javascript
+```javascript
     branch(
     condition:props=>boolean,
     left:HigherOrderComponent,
     [right: HigherOrderComponent]
     )(WrappedComponent)
-    ```
+```
  - 함수형 컴포넌트는 statef를 사용할 수 없지만, 프로퍼티와 콜백 함수를 활용해 우회적으로 사용할수 있다. withState()함수는 함수형 컴포넌트를 클래스형 컴포넌트로 변환하지 않아도 state를 사용할수 있게 해준다. 
  
-    ```javascript
+```javascript
     withState(
     stateName:string,
     stateUpdater:string,
     initialState:any,
     )(WrappedComponent)
-    ```
+```
  - 만약 함수형 컴포넌트에도 생명주기 함수를 적용하고 싶다면 lifecycle()함수를 사용하면 된다. lifecycle()함수를 사용하면 함수형 컴포넌트에 우회적으로 생명주기 함수를 추가할수 있고, 클래스형 컴포넌트 같은 경우도 생명주기함수에서 사용할 반복 코드를 lifecycle()함수로 묶어 재사용할수 있다.
  
-    ```javascript
+```javascript
     lifecycle({
     [lifeCycleMethod:string]:function,
     state:object,
     })(WrappedComponent)
-    ```
+```
 
 -------
 ### 참고하여 알아둘것!
