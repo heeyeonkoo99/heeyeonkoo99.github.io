@@ -131,9 +131,9 @@ function higherOrderComponent(Component){
 
 - recompose 라이브러리는 하이어오더 컴포넌트 중 자주 사용하는 패턴을 모은 '하이어오더 컴포넌트 라이브러리'이다. 
 
-```javascript
-yarn add recompose
-```
+  ```javascript
+  yarn add recompose
+  ```
 
  - branch()함수는 조건식에 따라 다른 하이어오더 컴포넌트를 출력해야하는 경우 사용하면 된다. 
   
