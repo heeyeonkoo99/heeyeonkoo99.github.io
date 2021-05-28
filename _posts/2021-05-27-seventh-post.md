@@ -105,8 +105,8 @@ const formula = compose(
 );
 ```
 
-# 하이어오더 컴포넌트
-디자인패턴은 코드 중 활용도가 높은 구현방식ㅇ르 모아둔 비밀레시피와 같다. 앞서 공부한 커링도 디자인 패턴의 일종이며 리액트 컴포넌트에도 디자인 패턴을 적용할수 있다. 이번에 알아볼 디자인 패턴은 데코레이터 패턴이며 데코레이터 패턴을 적용하여 하이어오더 컴포넌트까지 개념을 확장해본다.    
+# 하이어오더 컴포넌트    
+디자인패턴은 코드 중 활용도가 높은 구현방식을 모아둔 비밀레시피와 같다. 앞서 공부한 커링도 디자인 패턴의 일종이며 리액트 컴포넌트에도 디자인 패턴을 적용할수 있다. 이번에 알아볼 디자인 패턴은 데코레이터 패턴이며 데코레이터 패턴을 적용하여 하이어오더 컴포넌트까지 개념을 확장해본다.    
 - 데코레이터 패턴: 상속구조에서의 '기존구조를 해치지 않으면서 원하는 기능만 상속받는 것을 해결못함'이라는 단점을 보완하기 위해 데코레이터 패턴이 제안되었다. 클래스 간의 종속성 없이 기능만을 공유한다.        
 - 하이어오더 컴포넌트의 특징:
   - 함수나 클래스 형태의 컴포넌트를 모두 반환할수 있다.
@@ -129,12 +129,41 @@ function higherOrderComponent(Component){
 }
 ```
 
+- recompose 라이브러리는 하이어오더 컴포넌트 중 자주 사용하는 패턴을 모은 '하이어오더 컴포넌트 라이브러리'이다. 
+
+```javascript
+yarn add recompose
+```
+
+ - branch()함수는 조건식에 따라 다른 하이어오더 컴포넌트를 출력해야하는 경우 사용하면 된다. 
+  
+    ```javascript
+    branch(
+    condition:props=>boolean,
+    left:HigherOrderComponent,
+    [right: HigherOrderComponent]
+    )(WrappedComponent)
+    ```
+ - 함수형 컴포넌트는 statef를 사용할 수 없지만, 프로퍼티와 콜백 함수를 활용해 우회적으로 사용할수 있다. withState()함수는 함수형 컴포넌트를 클래스형 컴포넌트로 변환하지 않아도 state를 사용할수 있게 해준다. 
+ 
+    ```javascript
+    withState(
+    stateName:string,
+    stateUpdater:string,
+    initialState:any,
+    )(WrappedComponent)
+    ```
+ - 만약 함수형 컴포넌트에도 생명주기 함수를 적용하고 싶다면 lifecycle()함수를 사용하면 된다. lifecycle()함수를 사용하면 함수형 컴포넌트에 우회적으로 생명주기 함수를 추가할수 있고, 클래스형 컴포넌트 같은 경우도 생명주기함수에서 사용할 반복 코드를 lifecycle()함수로 묶어 재사용할수 있다.
+ 
+    ```javascript
+    lifecycle({
+    [lifeCycleMethod:string]:function,
+    state:object,
+    })(WrappedComponent)
+    ```
+
+-------
 ### 참고하여 알아둘것!
-
-
-
-* 참고한 사이트:         
-
 
 * 참고한 블로그: <https://jwprogramming.tistory.com/68>    
         
