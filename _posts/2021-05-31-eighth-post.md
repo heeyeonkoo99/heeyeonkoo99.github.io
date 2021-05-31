@@ -12,13 +12,13 @@ url: https://heeyeonkoo99.github.io/front-end/
 '공급자와 소비자를 컴포넌트로 구현하여 컨텍스트를 구성하는 과정'은 리액트 16.3버전의 컨텍스트 API에 편입되었다. 즉 컨텍스트 API를 사용하면 일일이 공급자와 소비자를 구현하지 않아도 된다.     
 ## 1. createContext()함수로 공급자와 소비자 만들기
 - createContext()는 리액트 최상위 함수이므로 React.createContext()와 같이 사용한다. 공급자는 Provider, 소비자는 Consumer로 정의되었다. 
- ```javascript
+```javascript
 const MyContext=React.createContext(defaultValue);
 // MyContext.Provider, MyContext.Consumer으로 접근하여 사용
 // 또는 const {Provider, Consumer}=React.createContext(defaultValue);와 같이 분할 할당하여 사용
 ```
 ## 2. 컨텍스트 API로 공급자와 소비자 만들기    
-- 컨텍스트 API를 이용하여 로딩 상태를 표시하는 공급자 컴포넌트르 작성해보겠다. 컨텍스트 API를 통해 생성된 공급자와 소비자는 각각 독립된 저장 공간을 가지면서 짝을 이뤄 데이터를 공유한다. 
+- 컨텍스트 API를 이용하여 로딩 상태를 표시하는 공급자 컴포넌트르 작성해보겠다. 컨텍스트 API를 통해 생성된 공급자와 소비자는 각각 독립된 저장 공간을 가지면서 짝을 이뤄 데이터를 공유한다.     
 __1. createContext()함수로 공급자 만들기__    
 여기서 setLoading()함수는 key,value,를 인자로 받아 key에 해당하는 state값을 저장한다. 예를 들어 setLoading("loading1",true)을 호출하면 state는 {loading1:true}가 되는것이다. 이후 render()함수가 호출되면서 컨텍스트 데이터는 {loading1:true,setLoading:this.setLoading}이 될것이다.
 
@@ -53,6 +53,7 @@ export default class LoadingProvider extends React.Component {
   }
 }
 ```
+    
 __2. 한개의 공급자를 구독하는 세개의 소비자 만들기__    
 익스포트한 Consumer를 받아 세 개의 소비자를 만든것이다. 
 ```javascript
@@ -94,7 +95,9 @@ export default ButtonWithNewConsumer;
 ```
 
 # 컨텍스트로 모달 만들기    
+
 <createModalProvider.jsx>
+
 ```javascript
   
 import React, { PureComponent } from 'react';
@@ -147,6 +150,7 @@ export default function createModalProvider(ContentMap = {}) {
 
 ```
 <DeleteModalContent.jsx>
+
 ```javascript
 import React from 'react';
 import { Consumer } from './ModalContext';
@@ -172,6 +176,7 @@ export default function DeleteModalContent({ id, name }) {
 }
 ```
 <CreateMemberModalContent.jsx>
+
 ```javascript
 
 import React, { PureComponent } from 'react';
@@ -210,6 +215,7 @@ class CreateMemberModalContent extends PureComponent {
 export default CreateMemberModalContent;
 ```
 <ModalProviderWithKey.jsx>
+
 ```javascript
   
 import createModalProvider from './createModalProvider';
