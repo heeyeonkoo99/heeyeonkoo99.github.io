@@ -4,172 +4,290 @@ date: 2021-05-31 08:26:28 -0400
 categories: front-end react
 url: https://heeyeonkoo99.github.io/front-end/
 ---
-5장에선 **커링**과 **하이어오더 컴포넌트** 같은 중요 개념들이 나와서 이를 정리해보고자 본 글을 포스팅해본다.🤣
-(~~책을 미리 한번 읽고나서 재독할때 코드를 따라쓰면서 공부내용을 온전히 내껄로 만드는 연습을 꾸준히 하자~~)
+3장에서 배운 property와 state는 부모와 자식컴포넌트가 연결된 상태에서 공유하는 데이터였다. 반면 컨텍스트는 부모와 자식 컴포넌트가 연결되어 있지 않아도 데이터를 공유할수 있게 해준다. 그렇기에 현재 로그인한 유저,테마, 선호하는 언어등의 데이터를 사용하는데에 쓰인다. 
 
-# 커링이란?
-쉽게 말하자면 '함수를 반환하는 함수'이다. 커링을 사용하는 이유는 '함수의 재활용'때문이며 당연하게도 커링의 장점은 중복된 코드를 반복적으로 입력하지 않고 원하는 기능을 조합하여 적재적소에 사용할수 있다는 것이다.
-- 커링 함수를 조합할때 커링 함수를 순서대로 조합하는 compose()함수를 사용한다.(for 코드 가독성)
-- 실무에서 compose()함수를 어떻게 사용하는지는 아래의 코드내용을 보면 알수 있다.
+# 컨텍스트 API란?
+![image](https://user-images.githubusercontent.com/68431716/120163846-e6ba7780-c234-11eb-9154-c3ba3e42b563.png)
+
+'공급자와 소비자를 컴포넌트로 구현하여 컨텍스트를 구성하는 과정'은 리액트 16.3버전의 컨텍스트 API에 편입되었다. 즉 컨텍스트 API를 사용하면 일일이 공급자와 소비자를 구현하지 않아도 된다.     
+## 1. createContext()함수로 공급자와 소비자 만들기
+- createContext()는 리액트 최상위 함수이므로 React.createContext()와 같이 사용한다. 공급자는 Provider, 소비자는 Consumer로 정의되었다. 
+ ```javascript
+const MyContext=React.createContext(defaultValue);
+// MyContext.Provider, MyContext.Consumer으로 접근하여 사용
+// 또는 const {Provider, Consumer}=React.createContext(defaultValue);와 같이 분할 할당하여 사용
+```
+## 2. 컨텍스트 API로 공급자와 소비자 만들기    
+- 컨텍스트 API를 이용하여 로딩 상태를 표시하는 공급자 컴포넌트르 작성해보겠다. 컨텍스트 API를 통해 생성된 공급자와 소비자는 각각 독립된 저장 공간을 가지면서 짝을 이뤄 데이터를 공유한다. 
+__1. createContext()함수로 공급자 만들기__    
+여기서 setLoading()함수는 key,value,를 인자로 받아 key에 해당하는 state값을 저장한다. 예를 들어 setLoading("loading1",true)을 호출하면 state는 {loading1:true}가 되는것이다. 이후 render()함수가 호출되면서 컨텍스트 데이터는 {loading1:true,setLoading:this.setLoading}이 될것이다.
 
 ```javascript
-const multiply = (a, b) => a * b;
-const add = (a, b) => a + b;
+  
+import React from 'react';
 
-const multiplyX = x => a => multiply(a, 2);
-const addX = x => a => add(x, a);
-const addFour = addX(4);
-const multiplyTwo = multiplyX(2);
-const multiplyThree = multiplyX(3);
+const { Provider, Consumer } = React.createContext({});
 
-const formulaWithoutCompose = addX(4)(multiplyX(3)(multiplyX(2)));
+export { Consumer };
 
-const formula = x => addFour(multiplyThree(multiplyTwo(x)));
-const formulaByReduce = [multiplyTwo, multiplyThree, addFour].reduce(
-  function (prevFunc, nextFunc) {
-    return function(value) {
-      return nextFunc(prevFunc(value));
-    }
-  },
-  function(k) { return k; }
-);
-const formulaByReduceResult = function(value) {
-  return addFour(
-    function(value) {
-      return multiplyThree(
-        function(value) {
-          return multiplyTwo(
-          (k => k)(value)
-          );
-        }(value)
-      );
-    }(value)
+export default class LoadingProvider extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+    this.setLoading = this.setLoading.bind(this);
+  }
+
+  setLoading(key, value) {
+    const newState = { [key]: value };
+    this.setState(newState);
+  }
+
+  render() {
+    const context = {
+      ...this.state,
+      setLoading: this.setLoading,
+    };
+
+    return <Provider value={context}>{this.props.children}</Provider>;
+  }
+}
+```
+__2. 한개의 공급자를 구독하는 세개의 소비자 만들기__    
+익스포트한 Consumer를 받아 세 개의 소비자를 만든것이다. 
+```javascript
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '../04/Button';
+import { Consumer } from './LoadingProviderWithNewContext';
+
+function ButtonWithNewConsumer({ label }) {
+  return (
+    <React.Fragment>
+      <Consumer>
+        {value => (
+          <Button onPress={() => value.setLoading('loading', !value.loading)}>
+            {value.loading ? '로딩중' : label}
+          </Button>
+        )}
+      </Consumer>
+      <Consumer>
+        {({ loading2, setLoading }) => (
+          <Button onPress={() => setLoading('loading2', !loading2)}>
+            {loading2 ? '로딩중' : label}
+          </Button>
+        )}
+      </Consumer>
+      <Consumer>
+        {({ loading, loading2 }) => <Button>{loading && loading2 ? '로딩중' : label}</Button>}
+      </Consumer>
+    </React.Fragment>
   );
+}
+
+ButtonWithNewConsumer.propTypes = {
+  label: PropTypes.string,
 };
 
-
-function _compose(funcs) {
-  return funcs.reduce(
-    function (prevFunc, nextFunc) {
-      return function() {
-        const args = Array.prototype.slice.call(arguments);
-        return nextFunc(prevFunc.call(this, args));
-      }
-    },
-    function(k) {
-      return k;
-    },
-  );
-}
-
-//실무에서 사용하는 함수 조합 기법 알아보기
-/*
-1.arguments를 사용하여 배열 인자 대신 나열형 인자로 함수 구조를 유연하게 만들기
--arguments는 javascript의 특수 변수로 함수 안에서 전달된 모든 인자 목록을 배열과 유사한 나열형자료(배열과 흡사하지만 객체 형태의 자료)로 저장해둔다. 여기선 배열함수 slice()를 사용하여
-나열형 자료를 배열 형태로 변환했다.
-2.arguments를 활용하여 하나의 실행 인자 value를 다중 인자로 사용 가능하게 확장하기
--앞선 에제에선 multiplyTwo,multiplyThree,addFour 모두 1개의 인자를 받아서 여러 인자를 처리하려면 이와 같은 방법을 쓴다.
-=>아래코드는 1,2번 둘다 포함된것이다.
-*/
-function _composeWithArgs() {
-  const funcs = Array.prototype.slice.call(arguments);
-  return funcs.reduce(
-    function (prevFunc, nextFunc) {
-      return function() {
-        const args = Array.prototype.slice.call(arguments);
-        return nextFunc(prevFunc.call(this, args));
-      }
-    },
-    function(k) {
-      return k;
-    },
-  );
-}
-
-// 화살표 함수 표현식
-export function compose(...funcs) {
-  return funcs.reduce(
-    (prevFunc, nextFunc) => (...args) => nextFunc(prevFunc(...args)),
-    k => k
-  );
-}
-
-// x
-// => x * 2
-// => (x * 2) * 3
-// => ((x * 2) * 3) + 4
-const formula = compose(
-  multiplyX(2),
-  multiplyX(3),
-  addX(4),
-);
+export default ButtonWithNewConsumer;
 ```
 
-# 하이어오더 컴포넌트    
-디자인패턴은 코드 중 활용도가 높은 구현방식을 모아둔 비밀레시피와 같다. 앞서 공부한 커링도 디자인 패턴의 일종이며 리액트 컴포넌트에도 디자인 패턴을 적용할수 있다. 이번에 알아볼 디자인 패턴은 데코레이터 패턴이며 데코레이터 패턴을 적용하여 하이어오더 컴포넌트까지 개념을 확장해본다.    
-- 데코레이터 패턴: 상속구조에서의 '기존구조를 해치지 않으면서 원하는 기능만 상속받는 것을 해결못함'이라는 단점을 보완하기 위해 데코레이터 패턴이 제안되었다. 클래스 간의 종속성 없이 기능만을 공유한다.        
-- 하이어오더 컴포넌트의 특징:
-  - 함수나 클래스 형태의 컴포넌트를 모두 반환할수 있다.
-  - 하이어오더 컴포넌트는 기존 컴포넌트를 확장한 컴포넌트이므로 기존 컴포넌트로 모든 프로퍼티를 전달해줘야 한다.
-
+# 컨텍스트로 모달 만들기    
+<createModalProvider.jsx>
 ```javascript
   
-function higherOrderComponent(Component){
-    return function Enhanced(props){
-        return <Component{...props}/>;
-    }
-}
+import React, { PureComponent } from 'react';
+import Modal from './Modal';
+import { Provider } from './ModalContext';
 
-function higherOrderComponent(Component){
-    return class Enhanced extends React.Component{
-        render(){
-            return <Component{...this.props}/>;
-        }
-    }
-}
-```
-
-- recompose 라이브러리는 하이어오더 컴포넌트 중 자주 사용하는 패턴을 모은 '하이어오더 컴포넌트 라이브러리'이다. 
-
-```javascript
-yarn add recompose
-```
-
- - branch()함수는 조건식에 따라 다른 하이어오더 컴포넌트를 출력해야하는 경우 사용하면 된다. 
+export default function createModalProvider(ContentMap = {}) {
+  return class ModalProvider extends PureComponent {
+    constructor(props) {
+      super(props);
   
-```javascript
-    branch(
-    condition:props=>boolean,
-    left:HigherOrderComponent,
-    [right: HigherOrderComponent]
-    )(WrappedComponent)
-```
- - 함수형 컴포넌트는 statef를 사용할 수 없지만, 프로퍼티와 콜백 함수를 활용해 우회적으로 사용할수 있다. withState()함수는 함수형 컴포넌트를 클래스형 컴포넌트로 변환하지 않아도 state를 사용할수 있게 해준다. 
- 
-```javascript
-    withState(
-    stateName:string,
-    stateUpdater:string,
-    initialState:any,
-    )(WrappedComponent)
-```
- - 만약 함수형 컴포넌트에도 생명주기 함수를 적용하고 싶다면 lifecycle()함수를 사용하면 된다. lifecycle()함수를 사용하면 함수형 컴포넌트에 우회적으로 생명주기 함수를 추가할수 있고, 클래스형 컴포넌트 같은 경우도 생명주기함수에서 사용할 반복 코드를 lifecycle()함수로 묶어 재사용할수 있다.
- 
-```javascript
-    lifecycle({
-    [lifeCycleMethod:string]:function,
-    state:object,
-    })(WrappedComponent)
-```
+      this.state = { showModal: false };
+      this.handleClose = this.handleClose.bind(this);
+      this.handleOpen = this.handleOpen.bind(this);
+    }
 
+    handleOpen(contentId, modalProps) {
+      this.contentId = contentId;
+      this.modalProps = modalProps;
+      this.setState({ showModal: true });
+    }
+
+    handleClose() {
+      this.setState({ showModal: false });
+    }
+
+    render() {
+      const { children } = this.props;
+      const { showModal } = this.state;
+      const ModalContent = ContentMap[this.contentId];
+  
+      return (
+        <Provider
+          value={{
+            openModal: this.handleOpen,
+            closeModal: this.handleClose,
+          }}
+        >
+          {children}
+          {showModal && ModalContent && (
+            <Modal>
+              <ModalContent {...this.modalProps} />
+            </Modal>
+          )}
+        </Provider>
+      );
+    }
+  };  
+}
+
+```
+<DeleteModalContent.jsx>
+```javascript
+import React from 'react';
+import { Consumer } from './ModalContext';
+import Button from '../04/Button';
+import Text from '../04/Text';
+
+export default function DeleteModalContent({ id, name }) {
+  return (
+    <Consumer>
+      {({ closeModal }) => (
+        <div>
+          <div>
+            <Text>
+              {name}을 정말로 삭제 하시겠습니까?
+            </Text>
+          </div>
+          <Button primary>예</Button>
+          <Button onPress={closeModal}>닫기</Button>
+        </div>
+      )}
+    </Consumer>
+  );
+}
+```
+<CreateMemberModalContent.jsx>
+```javascript
+
+import React, { PureComponent } from 'react';
+import { Consumer } from './ModalContext';
+import Button from '../04/Button';
+import Text from '../04/Text';
+import Input from '../03/Input';
+
+class CreateMemberModalContent extends PureComponent {
+  render() {
+    return (
+      <Consumer>
+        {({ closeModal }) => (
+          <div>
+            <div>
+              <Text>회원가입</Text>
+              <div>
+                <Input label="이메일" name="email" />
+              </div>
+              <div>
+                <Input label="이름" name="name" />
+              </div>
+              <div>
+                <Input label="비밀번호" name="password" />
+              </div>
+            </div>
+            <Button primary>가입하기</Button>
+            <Button onPress={closeModal}>닫기</Button>
+          </div>
+        )}
+      </Consumer>
+    );
+  }
+}
+
+export default CreateMemberModalContent;
+```
+<ModalProviderWithKey.jsx>
+```javascript
+  
+import createModalProvider from './createModalProvider';
+import DeleteModalContent from './DeleteModalContent';
+import CreateMemberModalContent from './CreateMemberModalContent';
+
+export const CONFIRM_DELETE_MODAL = 'confirm_delete_modal';
+export const CREATE_MEMBER_MODAL = 'create_member_modal';
+
+const CONTENT_MAP = {
+  [CONFIRM_DELETE_MODAL]: DeleteModalContent,
+  [CREATE_MEMBER_MODAL]: CreateMemberModalContent,
+};
+
+export default createModalProvider(CONTENT_MAP);
+```
+<ModalStory.jsx>
+```javascript
+  
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+
+import Modal from '../06/Modal';
+import ModalProvider, { Consumer } from '../06/ModalProvider';
+import ModalProviderWithKey, {
+  CONFIRM_DELETE_MODAL,
+  CREATE_MEMBER_MODAL,
+} from '../06/ModalProviderWithKey';
+// import { Consumer as ModalConsumer } from '../06/createModalProvider';
+import { Consumer as ModalConsumer } from '../06/ModalContext';
+import Button from '../04/Button';
+import Text from '../04/Text';
+import ButtonWithModal from '../06/ButtonWithModal';
+
+storiesOf('Modal', module)
+  .addWithJSX('기본 설정', () => (
+    <Modal>
+      <div>
+        <Text>정말로 삭제 하시겠습니까?</Text>
+      </div>
+      <Button primary>예</Button>
+      <Button>닫기</Button>
+    </Modal>
+  ))
+  .addWithJSX('ButtonWithModal', () => <ButtonWithModal />)
+  .addWithJSX('ModalProvider', () => (
+    <ModalProvider>
+      <div>
+        <Text>다음 버튼 눌러 모달을 실행합니다.</Text>
+        <Consumer>{({ openModal }) => <Button onPress={() => openModal()}>삭제</Button>}</Consumer>
+      </div>
+    </ModalProvider>
+  ))
+  .addWithJSX('ModalProviderWithKey', () => (
+    <ModalProviderWithKey>
+      <div>
+        <Text>다음 버튼 눌러 모달을 실행합니다.</Text>
+        <ModalConsumer>
+          {({ openModal }) => (
+            <Button onPress={() => openModal(CONFIRM_DELETE_MODAL, { id: 1, name: '상품1' })}>
+              모달 열기
+            </Button>
+          )}
+        </ModalConsumer>
+        <ModalConsumer>
+          {({ openModal }) => (
+            <Button onPress={() => openModal(CREATE_MEMBER_MODAL)}>회원 가입</Button>
+          )}
+        </ModalConsumer>
+      </div>
+    </ModalProviderWithKey>
+  ));
+```
 -------
 ### 참고하여 알아둘것!
-
-* 참고한 블로그: <https://jwprogramming.tistory.com/68>    
-        
-     
-    
-**~~역시 공식사이트를 가야지 명확한 답을 얻을 수 있다.~~**
+* 참고한 사이트: <https://ko.reactjs.org/docs/context.html>     
+* 참고한 블로그: <https://velopert.com/3606>    
+**~~갓 벨로퍼트...~~**
 
 
 
