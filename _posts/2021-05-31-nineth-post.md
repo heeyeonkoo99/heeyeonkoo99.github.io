@@ -9,7 +9,7 @@ url: https://heeyeonkoo99.github.io/front-end/
 추가적으로, 리덕스의 미들웨어라는 기능을 통하여 비동기 작업, 로깅 등의 확장적인 작업들을 더욱 쉽게 할 수도 있게 해준다.    
 ![image](https://user-images.githubusercontent.com/68431716/120169348-d0afb580-c23a-11eb-97ab-d32cd4915cf1.png)
 
-__*리덕스 개발준비를 위해 아래 명령어들을 이용해 리덕스 개발준비한다.*__
+__*리덕스 개발준비를 위해 아래 명령어들을 이용한다.*__
 ```javascript
 > yarn add redux react-redux
 ```
@@ -140,35 +140,7 @@ export default AdvReduxApp;
 ```
 
 - __액션 분리하기__      
-[07/actions/loadingActions.js]      
 
-```javascript
-export const SET_LOADING = 'loading/SET_LOADING';
-export const RESET_LOADING = 'loading/RESET_LOADING';
-
-export const setLoading = loading => ({
-  type: SET_LOADING,
-  payload: loading,
-});
-
-export const resetLoading = () => ({
-  type: RESET_LOADING
-});
-```
-[07/actions/loadingActions.js]    
-```javascript
-export const SET_LOADING = 'loading/SET_LOADING';
-export const RESET_LOADING = 'loading/RESET_LOADING';
-
-export const setLoading = loading => ({
-  type: SET_LOADING,
-  payload: loading,
-});
-
-export const resetLoading = () => ({
-  type: RESET_LOADING
-});
-```
 [07/actions/loadingActions.js]    
 ```javascript
 export const SET_LOADING = 'loading/SET_LOADING';
