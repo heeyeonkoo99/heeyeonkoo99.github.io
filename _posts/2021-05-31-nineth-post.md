@@ -6,10 +6,10 @@ url: https://heeyeonkoo99.github.io/front-end/
 ---
 # 리덕스란?
 리덕스는 컨텍스트보다 조금 더 체계적으로 데이터를 관리한다. 리덕스 또한 데이터 관리를 위해 만들어진 기술이므로 데이터 중심으로 개념을 살피면 좋다. 리덕스는 데이터를 스토어(store)라는 곳에서 관리한다. 리덕스는, 가장 사용률이 높은 상태관리 라이브러리로, 리덕스를 사용하면, 여러분이 만들게 될 컴포넌트들의 상태 관련 로직들을 다른 파일들로 분리시켜서 더욱 효율적으로 관리 할 수 있다. 또한, 컴포넌트끼리 상태를 공유하게 될 때 여러 컴포넌트를 거치지 않고도 손쉽게 상태 값을 전달 할 수 있다.
-추가적으로, 리덕스의 미들웨어라는 기능을 통하여 비동기 작업, 로깅 등의 확장적인 작업들을 더욱 쉽게 할 수도 있게 해준다.
+추가적으로, 리덕스의 미들웨어라는 기능을 통하여 비동기 작업, 로깅 등의 확장적인 작업들을 더욱 쉽게 할 수도 있게 해준다.    
 ![image](https://user-images.githubusercontent.com/68431716/120169348-d0afb580-c23a-11eb-97ab-d32cd4915cf1.png)
 
-__*리덕스 개발준비를 위해 아래 명령어들을 이용해 리액트 개발준비한다.*__
+__*리덕스 개발준비를 위해 아래 명령어들을 이용해 리덕스 개발준비한다.*__
 ```javascript
 > yarn add redux react-redux
 ```
@@ -38,8 +38,10 @@ const reducer= (state,aciton)=> state+ action.payload;
 ```
 이때 리듀서가 반환하는 값의 자료형은 스토어의 이전 데이터와 동일해야 한다는점에 주의해야한다. 액션은 dispatch()함수를 통해 리듀서로 전달된다. (~~이제부터 아래같은 구조로 리듀서와 액션을 분리하여 코드를 써보자!~~)
 <img src = "https://user-images.githubusercontent.com/68431716/120173861-706f4280-c23f-11eb-8dc6-83c8d0521052.png" width="400px">
-- __리듀서 분리하기__
+
+- __리듀서 분리하기__    
 [reducers/loadingReducer.jsx]    
+
 ```javascript
 import { SET_LOADING, RESET_LOADING } from '../actions/loadingActions';
 
@@ -136,8 +138,9 @@ class AdvReduxApp extends PureComponent {
 export default AdvReduxApp;
 ```
 
-- __액션 분리하기__    
-[07/actions/loadingActions.js]    
+- __액션 분리하기__      
+[07/actions/loadingActions.js]      
+
 ```javascript
 export const SET_LOADING = 'loading/SET_LOADING';
 export const RESET_LOADING = 'loading/RESET_LOADING';
