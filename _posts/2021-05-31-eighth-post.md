@@ -20,6 +20,7 @@ const MyContext=React.createContext(defaultValue);
      
 ## 2. 컨텍스트 API로 공급자와 소비자 만들기    
 - 컨텍스트 API를 이용하여 로딩 상태를 표시하는 공급자 컴포넌트르 작성해보겠다. 컨텍스트 API를 통해 생성된 공급자와 소비자는 각각 독립된 저장 공간을 가지면서 짝을 이뤄 데이터를 공유한다.     
+
 __1. createContext()함수로 공급자 만들기__    
 여기서 setLoading()함수는 key,value,를 인자로 받아 key에 해당하는 state값을 저장한다. 예를 들어 setLoading("loading1",true)을 호출하면 state는 {loading1:true}가 되는것이다. 이후 render()함수가 호출되면서 컨텍스트 데이터는 {loading1:true,setLoading:this.setLoading}이 될것이다.
 
