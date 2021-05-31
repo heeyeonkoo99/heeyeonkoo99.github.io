@@ -37,6 +37,7 @@ function reducer(state,action) {return state; }
 const reducer= (state,aciton)=> state+ action.payload;
 ```
 이때 리듀서가 반환하는 값의 자료형은 스토어의 이전 데이터와 동일해야 한다는점에 주의해야한다. 액션은 dispatch()함수를 통해 리듀서로 전달된다. (~~이제부터 아래같은 구조로 리듀서와 액션을 분리하여 코드를 써보자!~~)
+
 <img src = "https://user-images.githubusercontent.com/68431716/120173861-706f4280-c23f-11eb-8dc6-83c8d0521052.png" width="400px">
 
 - __리듀서 분리하기__    
