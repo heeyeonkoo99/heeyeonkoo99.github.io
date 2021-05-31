@@ -11,7 +11,7 @@ url: https://heeyeonkoo99.github.io/front-end/
 
 '공급자와 소비자를 컴포넌트로 구현하여 컨텍스트를 구성하는 과정'은 리액트 16.3버전의 컨텍스트 API에 편입되었다. 즉 컨텍스트 API를 사용하면 일일이 공급자와 소비자를 구현하지 않아도 된다.     
 ## 1. createContext()함수로 공급자와 소비자 만들기
-- createContext()는 리액트 최상위 함수이므로 React.createContext()와 같이 사용한다. 공급자는 Provider, 소비자는 Consumer로 정의되었다. 
+- createContext()는 리액트 최상위 함수이므로 React.createContext()와 같이 사용한다. 공급자는 Provider, 소비자는 Consumer로 정의되었다.     
 ```javascript
 const MyContext=React.createContext(defaultValue);
 // MyContext.Provider, MyContext.Consumer으로 접근하여 사용
@@ -95,8 +95,7 @@ ButtonWithNewConsumer.propTypes = {
 export default ButtonWithNewConsumer;
 ```
 
-# 컨텍스트로 모달 만들기        
-
+# 컨텍스트로 모달 만들기  
 <createModalProvider.jsx>
 
 ```javascript
