@@ -95,7 +95,7 @@ ButtonWithNewConsumer.propTypes = {
 export default ButtonWithNewConsumer;
 ```
 
-# 컨텍스트로 모달 만들기  
+# 컨텍스트로 모달 만들기     
 <createModalProvider.jsx>
 
 ```javascript
