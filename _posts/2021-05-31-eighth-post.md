@@ -17,6 +17,7 @@ const MyContext=React.createContext(defaultValue);
 // MyContext.Provider, MyContext.Consumer으로 접근하여 사용
 // 또는 const {Provider, Consumer}=React.createContext(defaultValue);와 같이 분할 할당하여 사용
 ```
+     
 ## 2. 컨텍스트 API로 공급자와 소비자 만들기    
 - 컨텍스트 API를 이용하여 로딩 상태를 표시하는 공급자 컴포넌트르 작성해보겠다. 컨텍스트 API를 통해 생성된 공급자와 소비자는 각각 독립된 저장 공간을 가지면서 짝을 이뤄 데이터를 공유한다.     
 __1. createContext()함수로 공급자 만들기__    
@@ -94,7 +95,7 @@ ButtonWithNewConsumer.propTypes = {
 export default ButtonWithNewConsumer;
 ```
 
-# 컨텍스트로 모달 만들기    
+# 컨텍스트로 모달 만들기        
 
 <createModalProvider.jsx>
 
