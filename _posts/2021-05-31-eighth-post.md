@@ -98,6 +98,7 @@ export default ButtonWithNewConsumer;
 
 # 컨텍스트로 모달 만들기  
  
+[createModalProvider.jsx]      
 ```javascript
   
 import React, { PureComponent } from 'react';
@@ -149,7 +150,7 @@ export default function createModalProvider(ContentMap = {}) {
 }
 
 ```
-
+[DeleteModalContent.jsx]
 
 ```javascript
 import React from 'react';
@@ -232,7 +233,7 @@ const CONTENT_MAP = {
 
 export default createModalProvider(CONTENT_MAP);
 ```
-<ModalStory.jsx>
+[ModalStory.jsx]
 ```javascript
   
 import React from 'react';
