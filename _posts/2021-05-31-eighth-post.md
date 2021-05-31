@@ -149,7 +149,7 @@ export default function createModalProvider(ContentMap = {}) {
 }
 
 ```
-<DeleteModalContent.jsx>
+
 
 ```javascript
 import React from 'react';
@@ -175,7 +175,7 @@ export default function DeleteModalContent({ id, name }) {
   );
 }
 ```
-<CreateMemberModalContent.jsx>
+[CreateMemberModalContent.jsx]
 
 ```javascript
 
@@ -214,7 +214,7 @@ class CreateMemberModalContent extends PureComponent {
 
 export default CreateMemberModalContent;
 ```
-<ModalProviderWithKey.jsx>
+[ModalProviderWithKey.jsx]
 
 ```javascript
   
