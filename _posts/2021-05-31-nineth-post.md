@@ -1,5 +1,5 @@
 ---
-title: "[리액트 프로그래밍 정석] 리덕스로 데이터 관리하기"
+title: "[리액트 프로그래밍 정석] 리덕스로 데이터 관리하기-1"
 date: 2021-05-31 08:26:28 -0400
 categories: front-end react
 url: https://heeyeonkoo99.github.io/front-end/
