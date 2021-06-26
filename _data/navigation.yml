@@ -1,12 +1,12 @@
 # main links
 main:
   - title: "Front-End"
-    url: /category/front-end/
+    url: /categories/front-end/
   - title: "Back-End"
-    url: /category/back-end/
+    url: /categories/back-end/
   - title: "Data Analysis"
-    url: /category/data-analysis/
+    url: /categories/data-analysis/
   - title: "Algorithm"
-    url: /category/algorithm/
+    url: /categories/algorithm/
   - title: "Journal"
-    url: /category/journal/
+    url: /categories/journal/
