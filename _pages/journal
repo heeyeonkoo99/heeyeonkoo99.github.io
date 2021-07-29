@@ -1,4 +1,8 @@
+---
 title: "Journal"
 layout: categories
+toc:true
+toc_sticky:true
 permalink: /journal/
 author_profile: true
+---
